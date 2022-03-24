@@ -35,5 +35,4 @@ switch (age){
         break
     default:
         console.log('You are not 18 or 19')
-        
 }
