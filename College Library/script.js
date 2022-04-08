@@ -17,6 +17,7 @@ Display.prototype.add = function(){
     console.log('Adding UI')
 
     //let uiString  = ''
+    //
 
 }
 Display.prototype.clear = function(){
