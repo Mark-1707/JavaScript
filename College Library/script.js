@@ -13,16 +13,40 @@ function Display(){
 }
 
 //Add Methods to display prototype
-Display.prototype.add = function(){
+Display.prototype.add = function(book){
     console.log('Adding UI')
-
-    //let uiString  = ''
-    //
+    tableBody = document.getElementById('tableBody')
+    let uiString  = `
+    <tr>
+        <td>${book.name}</td>
+        <td>${book.author}</td>
+        <td>${book.type}</td>
+    </tr>
+  `
+  tableBody.innerHTML += uiString 
 
 }
 Display.prototype.clear = function(){
     let libraryForm = document.getElementById('libraryForm');
     libraryForm.reset()
+}
+
+Display.prototype.validate = function(book){
+    if(book.name == '' || book.author == '' || book.type == ''){
+        return false
+    }else{
+        return true
+    }
+}
+
+Display.prototype.show = function(text){
+    let message = document.getElementById('message')
+    message.innerText = `
+    <div class="alert alert-${text} alert-dismissible fade show" role="alert">
+        <strong>Ohhh !</strong> You should check in on some of those fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    `
 }
 
 
@@ -55,7 +79,13 @@ function libraryFormSubmit(e){
 
     let display = new Display()
 
-    display.add(book)
+    if(display.validate(book)){
+        display.add(book)
+        display.clear()
+        display.show("Success")
+    }else{
+        display.show("Error")
+    }
     display.clear()
 
     e.preventDefault();
